@@ -1,16 +1,21 @@
-export const App = () => {
+import { useFetchContactsQuery } from '../redux/api-servise';
+import ContactForm from '../ContactForm';
+import ContactList from '../ContactList';
+import { Container, MainTitle, Title } from './Appstyled';
+import Filter from '../Filter';
+
+function App() {
+  const fetchContacts = useFetchContactsQuery();
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <Container>
+      <MainTitle>Phone Book</MainTitle>
+      <ContactForm contacts={fetchContacts} />
+      <Title>Contacts</Title>
+      <Filter title="Find contact by name" />
+      <ContactList contacts={fetchContacts} />
+    </Container>
   );
-};
+}
+
+export { App };
